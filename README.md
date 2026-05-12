@@ -226,7 +226,7 @@ New users with no interaction history receive:
 Add your YouTube demo link here:
 
 ```txt
-PASTE_YOUTUBE_LINK_HERE
+https://youtu.be/kQqoyY_7gUI
 ```
 
 ---
