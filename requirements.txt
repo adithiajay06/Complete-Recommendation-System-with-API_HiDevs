@@ -1,1 +1,11 @@
-# Add your project dependencies here
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+numpy
+pandas
+scikit-learn
+pytest
+httpx
+faker
+cachetools
