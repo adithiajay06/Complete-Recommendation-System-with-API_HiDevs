@@ -1,16 +1,8 @@
 # Complete Recommendation System with API
 
-This project is automatically generated.
-
-## Installation
-
-```sh
-pip install -r requirements.txt
-```# Recommendation System Microservice
-
 ## Overview
 
-This project is a production-ready recommendation system microservice built using FastAPI, SQLite, and modular recommendation engine architecture.
+This project is a production-ready recommendation system microservice built using FastAPI, SQLite, SQLAlchemy, and modular recommendation engine architecture.
 
 The system provides:
 
@@ -19,86 +11,145 @@ The system provides:
 * Recommendation explanations
 * REST API endpoints
 * Request tracing and logging
-* Performance metrics
 * Evaluation metrics
 * Concurrent load testing
+* Caching for performance optimization
 
 ---
 
-## Tech Stack
+# Tech Stack
 
-* Python
+* Python 3
 * FastAPI
 * SQLite
 * SQLAlchemy
 * Scikit-learn
 * Pytest
+* CacheTools
 
 ---
 
-## Features
+# Project Architecture
 
-### Recommendation Engine
+```txt
+app/
+├── api/
+│   ├── routes.py
+│   └── schemas.py
+│
+├── core/
+│   ├── cache.py
+│   ├── logger.py
+│   └── metrics.py
+│
+├── db/
+│   ├── database.py
+│   ├── models.py
+│   ├── repositories.py
+│   └── seed.py
+│
+├── engine/
+│   ├── content_based.py
+│   ├── cold_start.py
+│   ├── evaluator.py
+│   ├── explainer.py
+│   └── orchestrator.py
+│
+├── tests/
+│   ├── test_api.py
+│   └── test_metrics.py
+│
+└── main.py
+```
+
+---
+
+# Database Schema
+
+## Tables
+
+### Users
+
+Stores user information.
+
+### Skills
+
+Stores user skills and preferences.
+
+### Content
+
+Stores recommendation content items.
+
+### Interactions
+
+Stores user-content interaction history.
+
+---
+
+# Recommendation Strategy
+
+The recommendation engine uses:
 
 * Content-based filtering
-* Hybrid-ready architecture
-* Cold-start recommendations
-* Caching layer
-* Explanation generation
-
-### Database Design
-
-Normalized relational schema:
-
-* Users
-* Content
-* Skills
-* Interactions
-
-### API Endpoints
-
-| Endpoint                   | Method | Description                  |
-| -------------------------- | ------ | ---------------------------- |
-| /recommendations/{user_id} | GET    | Personalized recommendations |
-| /feedback                  | POST   | Submit interaction feedback  |
-| /health                    | GET    | Health check                 |
-| /metrics                   | GET    | Performance metrics          |
+* Cold-start recommendation fallback
+* Popularity-based ranking
+* Recommendation explanation generation
+* Caching layer for optimized performance
 
 ---
 
-## Evaluation Metrics
+# API Endpoints
 
-The system supports:
-
-* Precision@5
-* Recall@5
-* NDCG@5
-
----
-
-## Performance
-
-* Average recommendation latency: 78ms
-* Concurrent user simulation: 10 users
-* Caching enabled for optimized responses
+| Endpoint                   | Method | Description         |
+| -------------------------- | ------ | ------------------- |
+| /recommendations/{user_id} | GET    | Get recommendations |
+| /feedback                  | POST   | Submit feedback     |
+| /health                    | GET    | Health check        |
+| /metrics                   | GET    | Performance metrics |
 
 ---
 
-## Setup
+# API Example
 
-### Install Dependencies
+## Get Recommendations
+
+```http
+GET /recommendations/1
+```
+
+### Response
+
+```json
+{
+  "trace_id": "abc123",
+  "response_time_ms": 78.2,
+  "recommendations": [
+    {
+      "content_id": 4,
+      "title": "Course 4",
+      "explanation": "Recommended because of your interest in AI"
+    }
+  ]
+}
+```
+
+---
+
+# Setup Instructions
+
+## Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Seed Database
+## Seed Database
 
 ```bash
 python -m app.db.seed
 ```
 
-### Start API
+## Start FastAPI Server
 
 ```bash
 uvicorn app.main:app --reload
@@ -106,7 +157,7 @@ uvicorn app.main:app --reload
 
 ---
 
-## Swagger API Docs
+# Swagger API Docs
 
 ```txt
 http://localhost:8000/docs
@@ -114,7 +165,19 @@ http://localhost:8000/docs
 
 ---
 
-## Testing
+# Evaluation Metrics
+
+The system implements:
+
+* Precision@5
+* Recall@5
+* NDCG@5
+
+---
+
+# Testing
+
+Run unit tests:
 
 ```bash
 pytest
@@ -122,34 +185,63 @@ pytest
 
 ---
 
-## Load Testing
+# Load Testing
+
+Run concurrent request simulation:
 
 ```bash
 python load_test.py
 ```
 
+### Performance Result
+
+* Average response time: 78ms
+* Concurrent users tested: 10
+
 ---
 
-## Project Structure
+# Cold Start Handling
+
+New users with no interaction history receive:
+
+* Popular content recommendations
+* Trending content suggestions
+
+---
+
+# Features
+
+* Modular architecture
+* Repository pattern
+* Caching support
+* Logging and request tracing
+* Performance metrics
+* REST API
+* Recommendation explanations
+
+---
+
+# Demo Video
+
+Add your YouTube demo link here:
 
 ```txt
-app/
-├── api/
-├── core/
-├── db/
-├── engine/
-├── tests/
-└── main.py
+PASTE_YOUTUBE_LINK_HERE
 ```
 
 ---
 
-## Future Improvements
+# Future Improvements
 
 * Redis caching
 * PostgreSQL support
-* JWT authentication
 * Docker deployment
-* Collaborative filtering expansion
-* Real-time recommendation streaming
+* JWT authentication
+* Hybrid collaborative filtering
+* Real-time recommendations
 
+---
+
+# Author
+
+Adithi A
